@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURIX Lure - Product Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* ======================================= */
+        /* === GLOBAL STYLES & LAYOUT === */
+        /* ======================================= */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #080808;
+            background-color: #0d1a26;
+            background-image: url('displayimage/BG-wave.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Fixed background para hindi maging render-blocking */
+        .background-wave {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('displayimage/BG-wave.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            z-index: -1; 
+        }
+
+        /* === HEADER SECTION === */
+        header {
+            width: 100%;
+            padding: 20px 50px;
+            background: #120D24;
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 100px;
+            width: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ff527b;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* NAVIGATION BAR (REDUNDANT, BUT KEPT FOR CONSISTENCY) */
+        .mid-page-nav {
+            background-color: rgba(13, 26, 38, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-logo {
+            height: 100px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e6e6e6;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #1a73e8;
+        }
+
+        /* PRODUCT PAGE LAYOUT (Main Content Area) */
+        .product-details-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            /* Ito ang white/light box effect na gusto mo */
+            background-color: rgba(248, 251, 253, 0.95); /* Mas mataas na opacity para malinaw */
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            backdrop-filter: blur(2px); /* Bawas blur effect para mas malinaw */
+            border-radius: 8px; /* Nagdagdag ng konting curve */
+        }
+
+        /* KALIWANG SIDE: IMAGE & GALLERY */
+        .left-column {
+            flex: 2; /* Mas malaki sa kaliwa */
+            min-width: 350px;
+            padding-right: 30px;
+        }
+        .main-image {
+            /* I-adjust ang container para sa video/image ng lure */
+            text-align: center;
+        }
+        .main-image img, .main-video {
+            width: 100%;
+            height: auto;
+            max-height: 450px; 
+            object-fit: contain;
+            border-radius: 5px; /* Konting rounded edges */
+        }
+        .gallery {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            justify-content: center; /* I-center ang thumbnails */
+        }
+        .gallery-item {
+            border: 1px solid #ddd;
+            width: 70px;
+            height: 70px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-item:hover {
+            border-color: #000;
+        }
+
+        /* KANANG SIDE: PRODUCT INFO & ACTIONS */
+        .right-column {
+            flex: 1; /* Mas maliit sa kanan */
+            min-width: 300px;
+        }
+        .product-header {
+            /* Binago sa left align, katulad ng sa Polo Shirt image */
+            text-align: left; 
+            margin-bottom: 10px;
+        }
+        .product-header h1 {
+            font-size: 24px;
+            margin: 0;
+            line-height: 1.2;
+            color: #080808;
+            font-weight: 700;
+        }
+        .product-header .sku {
+            font-size: 12px;
+            color: #777;
+        }
+        .price {
+            font-size: 36px;
+            color: #d9534f; /* Pula */
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        /* E-COMMERCE LINKS STYLES */
+        .buy-options-links {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .buy-options-links label {
+            display: block;
+            font-weight: 700; /* Ginawang bold */
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #333;
+        }
+        .market-links {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+        }
+        .market-link a {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+        }
+        .market-link img {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            transition: transform 0.2s;
+        }
+        .market-link img:hover {
+            transform: scale(1.05);
+            border-color: #d9534f;
+        }
+        .market-link span {
+            display: block;
+            font-size: 10px;
+            color: #555;
+            margin-top: 4px;
+        }
+
+        /* PRODUCT DESCRIPTION SECTION */
+        .description-section {
+            width: 100%; /* Buong width sa ilalim */
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee; /* Nagdagdag ng divider */
+        }
+        .description-section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .description-section p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .description-section ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #555;
+        }
+        .description-section li {
+            margin-bottom: 5px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d9534f;
+        }
+
+        /* RESPONSIVENESS */
+        @media (max-width: 768px) {
+            .product-details-wrapper {
+                flex-direction: column;
+                padding: 10px;
+            }
+            .left-column, .right-column {
+                padding: 0;
+                min-width: 100%;
+            }
+            .right-column {
+                padding-top: 20px;
+            }
+            .product-header {
+                text-align: left;
+            }
+        }
+
+        /* ======================================= */
+/* === DESCRIPTION SECTION GRID STYLES === */
+/* ======================================= */
+
+.description-flex-grid {
+    display: flex;
+    gap: 30px; /* Space sa pagitan ng image at text */
+    margin-top: 20px;
+}
+
+.description-image-column {
+    flex: 1; /* Kumakain ng 1/3 hanggang kalahati ng space */
+    display: flex;
+    flex-direction: column; /* I-stack ang images patayo (vertical alignment) */
+    gap: 15px; /* Space sa pagitan ng 3 images */
+    min-width: 250px;
+}
+
+.description-text-column {
+    flex: 2; /* Kumakain ng 2/3 hanggang kalahati ng space (mas malaki sa kanan) */
+}
+
+.description-detail-img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* ======================================= */
+        /* === RESPONSIVE STYLES (MOBILE) === */
+        /* ======================================= */
+        @media (max-width: 768px) {
+            .container { padding: 0 15px; }
+            .mid-page-nav { position: static; background-color: #120D24; backdrop-filter: none; }
+            .nav-bar { flex-direction: column; padding: 10px 0; }
+            .nav-logo { height: 40px; }
+            .nav-links { gap: 8px; margin-top: 5px; }
+            .nav-links a { font-size: 0.65rem; white-space: nowrap; }
+            .contact-header { padding: 60px 0; }
+            .contact-header h1 { font-size: 2.2rem; }
+            .contact-header p { font-size: 1rem; }
+            
+            .contact-container { 
+                grid-template-columns: 1fr; /* Single column on mobile */
+                gap: 30px; 
+                margin: 20px auto; 
+            }
+}
+    </style>
+</head>
+<body>
+    
+<main>
+    <nav class="mid-page-nav">
+        <div class="container">
+            <div class="nav-bar">
+                <a href="index.html" class="logo-link">
+                    <img src="../displayimage/DAY1CRAFTLOGO.PNG" alt="Company Logo" class="nav-logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../lure.html">Lures</a></li>
+                    <li><a href="../Aparrel.html">Aparrel</a></li>
+                    <li><a href="../about.html">About Us</a></li>
+                    <li><a href="../services.html">Services Offered</a></li>
+                    <li><a href="../contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+
+        <div class="product-details-wrapper">
+
+            <div class="left-column">
+                <div class="main-image">
+                    <video autoplay muted controls class="main-video">
+                        <source src="../displayimage/MARKETING002S.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                
+                <div class="gallery">
+                  
+                </div>
+            </div>
+
+            <div class="right-column">
+                
+                <div class="product-header">
+                    <h1 class="product-title">AURIX-002S “Silver Scale Shadow” Metal Jig</h1>
+                </div>
+
+                <div class="price"></div> 
+
+                <form>
+                    <div class="buy-options-links">
+                        <label>Connect With Us By Clicking Link Below !</label>
+                        <div class="market-links">
+                            <div class="market-link">
+                                <a href="[LAZADA SHOP LINK]" target="_blank">
+                                    <img src="../displayimage/lazada.png" alt="Lazada">
+                                    <span>Lazada</span>
+                                </a>
+                            </div>
+                            <div class="market-link">
+                                <a href="[SHOPEE SHOP LINK]" target="_blank">
+                                    <img src="../displayimage/shopee.png" alt="Shopee">
+                                    <span>Shopee</span>
+                                </a>
+                            </div>
+                            <div class="market-link">
+                                <a href="[TIKTOK SHOP LINK]" target="_blank">
+                                    <img src="../displayimage/tiktok.png" alt="TikTok">
+                                    <span>TikTok</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>   
+            </div>
+            <div class="description-section">
+    <div class="description-flex-grid">
+
+     <div class="description-image-column">
+    <img src="../displayimage/002S FRONT.jpg" alt="Tail Green Glow" class="description-detail-img">
+       <img src="../displayimage/002SREVERSE.jpg" alt="Red Dot Glow" class="description-detail-img">
+   <img src="../displayimage/002SGID.jpg" alt="Glow in the Dark" class="description-detail-img">
+     
+</div>
+
+        <div class="product-info-container">
+
+    <h2>Product Specifications & Features</h2>
+    <ul>
+        <li><span class=""><strong>Available Weights:</strong></span> 100g • 130g • 160g • 200g • 250g • 300g</li>
+        <li><span class=""><strong>Body Material:</strong></span> Durable and High-Density Lead Alloy</li>
+        <li><span class=""><strong>Finish:</strong></span> High-quality paint with a Polyurethane Top Coat for enhanced durability and chip resistance.</li>
+        <li><span class=""><strong>Visual Appeal:</strong></span> High-definition holographic scale pattern mimics real baitfish, creating lifelike underwater flashes that attract predatory fish.</li>
+        <li><span class=""><strong>Glow Pigment:</strong></span> Only Green Glow Effect on both obverse and reverse sides of the body.</li>
+        <li><span class=""><strong>Premium Holographic Reverse:</strong></span> Designed for maximum light reflection and depth contrast.</li>
+        <li><span class=""><strong>Saltwater-Resistant Coating:</strong></span> Protects against corrosion and ensures long-lasting color vibrancy.</li>
+        <li><span class=""><strong>Balanced Center-Weight:</strong></span> Promotes a stable, controlled fall and realistic fluttering motion.</li>
+    </ul>
+
+    <h2>Product Description</h2>
+    <p>
+        The <strong>AURIX-002S "Silver Scale Shadow"</strong> blends visual realism with practical performance. Its silver-holographic scaled body replicates the natural shimmer of small baitfish, delivering a subtle yet captivating flash that draws the attention of predators in varying light conditions.
+    </p>
+    <p>
+        A gradient head shadow effect adds depth and dimension, simulating real fish movement underwater and enhancing its natural profile. This precise balance of shimmer and contrast gives the lure a uniquely lifelike and dynamic presence during descent.
+    </p>
+    <p>
+        The soft <strong>green glow that runs along the belly and lower fins</strong> emits a gentle luminescence, creating a natural, non-artificial glow signature that remains visible in deep or murky waters.
+    </p>
+    <p>
+        This makes the **AURIX-002S** especially effective for **nighttime jigging, low-visibility waters, or when fish respond to subtle, natural presentations**.
+    </p>
+
+    <h3>Ideal For</h3>
+    <p> Night fishing, low-light, and deep-water jigging where a subtle, constant glow is preferred.
+    </p>
+</div>
+    </div>
+</div>
+
+    <script>
+        // Update ang function para mag-handle ng video source change, kung gagamitin mo.
+        function changeVideo(newSrc) {
+            // Kunin ang video element
+            const videoElement = document.querySelector('.main-video');
+            const sourceElement = videoElement.querySelector('source');
+
+            // Palitan ang source ng video at i-reload
+            if (sourceElement) {
+                sourceElement.src = newSrc;
+            } else {
+                // Kung walang source element, direkta sa video element
+                videoElement.src = newSrc;
+
+
+            }
+            videoElement.load(); // I-load ang bagong video
+            videoElement.play(); // I-play ang bagong video
+        }
+        
+        // Kung gusto mo lang mag-display ng image (hindi video) sa main area, palitan mo ang "main-video" ng "main-image" at gamitin ang:
+        // function changeImage(newSrc) {
+        //     document.getElementById('mainPoloImage').src = newSrc; // Kung gagamitin mo ang ID
+        // }
+
+    </script>
+</main>
+</body>
+</html>

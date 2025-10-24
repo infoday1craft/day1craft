@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRAK Lure - Day1Craft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+        /* ======================================= */
+        /* === GLOBAL STYLES & LAYOUT === */
+        /* ======================================= */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #f0f0f0; /* Mas light na gray para sa pangkalahatang text */
+            background-color: #0d1a26; /* Madilim na asul para sa propesyonal na background */
+            background-image: url('C:/Users/D1CPI/Desktop/IVAN FINAL WEB/webhosting/displayimage/BG-wave.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* === HEADER SECTION === */
+        header {
+            width: 100%;
+            padding: 20px 50px; /* Ayusin ang padding ayon sa gusto mo */
+            background: #120D24; /* Ang background color ng nav bar */
+        }
+        
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 100px; /* Binawasan ang height para mas proportionate */
+            width: auto;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            color: rgb(255, 255, 255);
+            text-decoration: none; /* Tinanggal ang underline */
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ff527b;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* ======================================= */
+        /* === NAVIGATION BAR === */
+        /* ======================================= */
+        .mid-page-nav {
+            background-color: rgba(13, 26, 38, 0.8); /* Semi-transparent para sa modernong look */
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px); /* I-blur ang background para sa cool effect */
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-logo {
+            height: 50px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #e6e6e6;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #1a73e8; /* Isang vibrant na asul kapag naka-hover */
+        }
+
+        /* ======================================= */
+        /* === PRODUCT DETAILS SECTION === */
+        /* ======================================= */
+        .product-details-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .product-details h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .marketing-image-wrapper {
+            margin: 40px auto;
+            max-width: 800px;
+        }
+
+        .main-product-image {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+
+        .main-product-video {
+            width: 100%;
+            max-width: 600px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .purchase-links-wrapper {
+            margin: 50px 0;
+        }
+
+        .purchase-links-wrapper p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #c0c0c0; /* Mas light na kulay para sa subtitle */
+        }
+
+        .purchase-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap; /* Para mag-adjust sa mobile */
+        }
+
+        .purchase-btn {
+            text-decoration: none;
+            color: #ffffff;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .purchase-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+         /* Styling ng container para ma-align ang logo at text */
+        .purchase-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .purchase-btn {
+            display: flex; /* Gawing flex container ang bawat link */
+            flex-direction: column; /* I-stack ang image at text sa itaas at ibaba */
+            align-items: center; /* I-align sa gitna (pahalang) ang contents */
+            text-decoration: none; /* Tanggalin ang underline sa link */
+            color: #ffffff; /* Kulay ng text */
+        }
+
+        /* Styling para sa mga logo */
+        .store-logo {
+            width: 50px;
+            height: auto;
+        }
+
+        /* Styling para sa text sa ilalim ng logo */
+        .purchase-btn span {
+            margin-top: 5px; /* Dagdagan ang espasyo sa pagitan ng image at text */
+            font-size: 14px; /* Laki ng font */
+        }
+
+        /* Hover effect */
+        .purchase-btn:hover .store-logo {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .purchase-btn:hover span {
+            color: #ff527b; /* Baguhin ang kulay ng text pag-hover */
+        }
+
+        /* Optional: Para lumaki ang logo kapag hinover */
+        .purchase-links a:hover .store-logo {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+
+        .shopee {
+            background: linear-gradient(to right, #ee4d2d, #ff715a);
+        }
+
+        .lazada {
+            background: linear-gradient(to right, #1a1a7a, #3f3f9f);
+        }
+
+        .tiktok {
+            background: linear-gradient(to right, #000000, #404040);
+        }
+
+        .facebook {
+            background: linear-gradient(to right, #1877f2, #469afc);
+        }
+
+        .product-info {
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .product-info h2 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin-top: 50px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .product-info ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .product-info li {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            color: #e0e0e0;
+        }
+
+        .product-info p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            color: #c0c0c0;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <nav class="mid-page-nav">
+            <div class="container">
+                <div class="nav-bar">
+                    <a href="index.html" class="logo-link">
+                        <img src="C:\Users\D1CPI\Desktop\webhosting\displayimage/DAY1CRAFTLOGO.PNG" alt="Company Logo" class="nav-logo">
+                    </a>
+                    <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../lure.html">Lures</a></li>
+                    <li><a href="../Aparrel.html">Aparrel</a></li>
+                    <li><a href="../about.html">About Us</a></li>
+                    <li><a href="../services.html">Services Offered</a></li>
+                    <li><a href="../contact.html">Contact Us</a></li>
+                </ul>
+                </div>
+            </div>
+        </nav>
+
+        <section class="product-details-section">
+            <div class="container">
+                <div class="product-details">
+                    <h1>AURIX 100g-130g-160g-200g-250g-300g</h1>
+                    
+                    <video autoplay muted controls class="main-product-video">
+    <source src="C:\Users\D1CPI\Desktop\IVAN FINAL WEB\webhosting 9-24-25\displayimage\MARKETING-002C.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+                     <div class="purchase-links-wrapper">
+                        <p>Connect With Us</p>
+                        <div class="purchase-links">
+                    
+                            <a href="ILAGAY_MO_ANG_LINK_NG_SHOPEE_MO_DITO" class="purchase-btn" target="_blank">
+                                <img src="C:/Users/D1CPI/Desktop/IVAN FINAL WEB/webhosting/displayimage/shopee.png" alt="Shopee Store" class="store-logo">
+                                <span>Shopee</span>
+                            </a>
+                            <a href="ILAGAY_MO_ANG_LINK_NG_LAZADA_MO_DITO" class="purchase-btn" target="_blank">
+                                <img src="C:/Users/D1CPI/Desktop/IVAN FINAL WEB/webhosting/displayimage/lazada.png" alt="Lazada Store" class="store-logo">
+                                <span>Lazada</span>
+                            </a>
+                            <a href="ILAGAY_MO_ANG_LINK_NG_TIKTOK_MO_DITO" class="purchase-btn" target="_blank">
+                                <img src="C:/Users/D1CPI/Desktop/IVAN FINAL WEB/webhosting/displayimage/tiktok.png" alt="TikTok Shop" class="store-logo">
+                                <span>TikTok Shop</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="product-info">
+    <h2>Product Specifications & Features</h2>
+    <ul>
+        <li>Weight: 180g - 200g - 300g</li>
+        <li>Body Material: Durable Lead Alloy</li>
+        <li>Finish: High-quality paint with a Polyurethane Top Coat for enhanced durability and chip resistance.</li>
+        <li>Visual Appeal: Features high-quality *"holograms" that mimic real fish scales, attracting fish with their vibrant underwater reflection.</li>
+    </ul>
+
+    <h2>AURIX-001C:Story Line</h2>
+    <p>
+        The AURIX-001C is a meticulously crafted jig designed for anglers who demand performance and resilience. Its sleek, aerodynamic profile allows for a rapid descent and a darting action that perfectly mimics an injured baitfish. Built from a robust **lead alloy** and sealed with a protective **polyurethane coating**, it's engineered to withstand the harshest conditions without compromising its effectiveness.
+    </p>
+    <p>
+        The AURIX-001C features a unique blue, green, and black striped pattern with a lifelike eye. This color combination is highly effective because it leverages a combination of contrast and natural camouflage:
+        This isn't just a lure; its a testament to superior craftsmanship, blending art and science to help you achieve a successful catch every time.
+    </p>
+</div>
+    
+    <script>
+        // Helper for random numbers
+        const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+        // Different possible transformation sequences
+        const sequences = [
+            () => {
+                return gsap.timeline()
+                    .fromTo(".product-details-section",
+                        {opacity: 0, scale: 0.2, rotateY: rand(-180,180), skewX: rand(-45,45)},
+                        {opacity: 1, scale: 1, rotateY: 0, skewX: 0, duration: 2, ease:"back.out(2)"}
+                    );
+            },
+            () => {
+                return gsap.timeline()
+                    .fromTo(".product-details-section",
+                        {opacity: 0, rotateX: rand(-180,180), y: -200, filter:"blur(10px)"},
+                        {opacity: 1, rotateX: 0, y:0, filter:"blur(0px)", duration: 2.2, ease:"power4.out"}
+                    );
+            },
+            () => {
+                return gsap.timeline()
+                    .fromTo(".product-details-section",
+                        {opacity: 0, scale: 2, rotate: rand(-90,90), x: rand(-300,300)},
+                        {opacity: 1, scale: 1, rotate: 0, x:0, duration: 2.5, ease:"elastic.out(1,0.5)"}
+                    );
+            }
+        ];
+
+        // Pick a random sequence on each refresh
+        const animation = sequences[Math.floor(Math.random() * sequences.length)];
+        animation();
+
+        // Pulse effect after transform
+        gsap.to(".product-details-section", {
+            scale: 1.05,
+            duration: 0.3,
+            repeat: 2,
+            yoyo: true,
+            delay: 2.6,
+            ease: "power2.inOut"
+        });
+    </script>
+</body>
+</html>
