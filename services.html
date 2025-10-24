@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services Offered - Day1Craft</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"> 
+    <style>
+        /* ======================================= */
+        /* === GLOBAL STYLES & LAYOUT === */
+        /* ======================================= */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: #f0f0f0;
+            background-color: #0d1a26;
+            background-image: url('displayimage/BG-wave.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* === NAVIGATION BAR === */
+        .mid-page-nav {
+            background-color: rgba(13, 26, 38, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .nav-logo {
+            height: 100px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            position: relative;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ff527b;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* ======================================= */
+        /* === SERVICES MAIN CONTENT === */
+        /* ======================================= */
+        .services-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .services-section h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .services-section > p {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            color: #c0c0c0;
+            font-size: 1.1rem;
+        }
+
+        /* --- SERVICE CARD --- */
+        .service-card {
+            background-color: rgba(26, 42, 67, 0.7);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            gap: 40px;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+
+        .service-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            object-fit: cover;
+        }
+
+        .text-content {
+            text-align: left;
+            flex-grow: 1;
+        }
+        
+        .text-content h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid #ff527b;
+            padding-bottom: 5px;
+        }
+
+        .text-content p {
+            font-size: 1rem;
+            color: #c0c0c0;
+            text-align: justify;
+        }
+        
+        /* ======================================= */
+        /* === LURE DETAILS SECTION (NEW GRID) === */
+        /* ======================================= */
+        #lure-details {
+            padding: 80px 0;
+            text-align: center;
+            background-color: rgba(0,0,0,0.2);
+        }
+        
+        #lure-details h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        
+        #lure-details > p {
+            max-width: 900px;
+            margin: 0 auto 40px;
+            color: #c0c0c0;
+            font-size: 1.1rem;
+        }
+        
+        .lure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .lure-item {
+            opacity: 0; /* PARA SA JS ANIMATION */
+            transform: translateY(30px); /* PARA SA JS ANIMATION */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* PARA SA JS ANIMATION */
+            
+            background-color: rgba(13, 26, 38, 0.9);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            text-align: left;
+            transition: border-left 0.3s ease-in-out;
+            border-left: 5px solid transparent;
+            min-height: 250px;
+        }
+
+        /* FINAL STATE NG LURE ITEM */
+        .lure-item.animate-show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .lure-item:hover {
+            border-left: 5px solid #ff527b; 
+        }
+        
+        .lure-item i {
+            font-size: 2.5rem;
+            color: #ff527b; 
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .lure-item h3 {
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        .lure-item p {
+            font-size: 0.95rem;
+            color: #a0a0a0;
+            text-align: justify;
+        }
+
+        /* ======================================= */
+        /* === DESKTOP LAYOUT (Grid & Alignment) === */
+        /* ======================================= */
+        @media (min-width: 768px) {
+            .service-card {
+                display: grid;
+                grid-template-columns: 1fr 2fr; 
+                align-items: center;
+                gap: 50px;
+            }
+            
+            .service-card:nth-child(even) {
+                grid-template-columns: 2fr 1fr;
+            }
+
+            .service-card img {
+                max-width: 100%;
+                width: 100%;
+                height: 250px; 
+                object-fit: cover;
+            }
+
+            .service-card:nth-child(even) img {
+                order: 2; 
+            }
+
+            .text-content {
+                order: 1; 
+            }
+        }
+
+        /* ======================================= */
+        /* === MOBILE RESPONSIVE FIXES === */
+        /* ======================================= */
+       @media (max-width: 768px) {
+            .container { padding: 0 15px; }
+            .mid-page-nav { position: static; background-color: #120D24; backdrop-filter: none; }
+            .nav-bar { flex-direction: column; padding: 10px 0; }
+            .nav-logo { height: 40px; }
+            .nav-links { gap: 8px; margin-top: 5px; }
+            .nav-links a { font-size: 0.65rem; white-space: nowrap; }
+
+            /* Service Cards */
+            .services-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .service-card {
+                padding: 20px;
+            }
+
+            .service-card img {
+                height: 150px;
+            }
+
+            .text-content h2 {
+                font-size: 1.5rem;
+            }
+            
+            .text-content p {
+                font-size: 0.9rem;
+            }
+
+            /* Lure Details */
+            #lure-details h2 {
+                font-size: 2rem;
+            }
+            
+            /* Animation disabled on mobile for performance */
+            .slide-in-left, .slide-in-right, .lure-item {
+                opacity: 1 !important;
+                transform: translateX(0) !important;
+            }
+        }
+
+        /* ======================================= */
+        /* === ANIMATION STYLES (for desktop) === */
+        /* ======================================= */
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: transform 1s ease-out, opacity 1s ease-out;
+        }
+
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: transform 1s ease-out, opacity 1s ease-out;
+        }
+
+        .service-card.show .slide-in-left,
+        .service-card.show .slide-in-right {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <nav class="mid-page-nav">
+            <div class="container">
+                <div class="nav-bar">
+                    <a href="index.html" class="logo-link">
+                        <img src="displayimage/DAY1CRAFTLOGO.png" alt="Company Logo" class="nav-logo">
+                    </a>
+                    <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="lure.html">Product Lures</a></li>
+                    <li><a href="Aparrel.html">Aparrel</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services Offered</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+        </nav>
+
+        <section class="services-section container">
+            <h1>Our Custom Lure Manufacturing Services</h1>
+            <p>
+                Day 1 Craft Philippines Inc. offers end-to-end manufacturing solutions, combining traditional craftsmanship with modern industrial precision to produce world-class fishing tackle.
+            </p>
+            
+            <div class="service-grid">
+
+                <div class="service-card">
+                    <img class="slide-in-left" src="displayimage/INJECTION.png" alt="Injection machine for die casting">
+                    <div class="text-content slide-in-right">
+                        <h2>Lead Die Casting</h2>
+                        <p>
+                            At Day 1 Craft Philippines Inc., **lead die casting** is the foundation of our fishing lure production. This is where we transform raw lead alloys into consistent, detailed lure bodies. By combining specially formulated alloys with strict process controls, we ensure every cast delivers the ideal balance of **strength, durability, and performance**. The molten metal is injected into high-quality molds under controlled temperature and pressure, ensuring each lure body has **uniform dimensions, smooth surfaces, and crisp details**. This process is crucial for creating a stable, production-ready base for all subsequent stages, from painting to assembly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img class="slide-in-right" src="displayimage/PAINTING.png" alt="Mass production airbrush painting">
+                    <div class="text-content slide-in-left">
+                        <h2>Mass Production Airbrush Painting</h2>
+                        <p>
+                            Our **airbrush painting process** is where function meets artistry. We transform each lure body into a visually striking and performance-ready product with vibrant colors and smooth gradients. Our skilled painters use precision airbrush systems to apply multiple layers—from base coats to detailed patterns and protective clear coats—creating **depth of color and lifelike shading**. This multi-layer method, combined with UV-resistant finishes, ensures every lure not only looks realistic but also maintains its quality and appearance after repeated use in the water.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img class="slide-in-left" src="displayimage/Padprinting.png" alt="Pad printing machine">
+                    <div class="text-content slide-in-right">
+                        <h2>Pad Printing</h2>
+                        <p>
+                            **Pad printing** is a key process for applying fine details, logos, and multi-colored designs onto fishing lures with **precision and consistency**. This technique uses a flexible silicone pad to transfer ink from an etched plate directly onto the curved or irregular surfaces of the lure. This allows us to apply sharp, accurate markings where traditional methods would fail. We can reproduce intricate details like **realistic eye patterns, scale designs, and brand logos** with excellent repeatability, ensuring every element is clear and durable.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img class="slide-in-right" src="displayimage/hotstamp.png" alt="Hot stamping machine">
+                    <div class="text-content slide-in-left">
+                        <h2>Hot Stamping</h2>
+                        <p>
+                            **Hot stamping** is our signature process for adding premium details and high-value finishes. This technique uses a combination of heat and pressure to transfer metallic foils, holographic films, or custom patterns directly onto the lure surface. The process ensures designs like **reflective scales, metallic logos, and accent stripes** are applied with high precision and strong adhesion. These durable embellishments not only enhance the lure's aesthetic appeal but also increase its market value by creating eye-catching, lifelike flashes underwater.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="lure-details" class="container">
+    <h2>Our Premium Hand-Crafted Lure Categories</h2>
+    <p>We pride ourselves on the meticulous design and professional quality of every lure we craft. Our extensive selection ensures you have the perfect tool for any fishing scenario.</p>
+
+    <div class="lure-grid">
+        
+        <div class="lure-item">
+            <i class="fa-solid fa-weight-hanging"></i>
+            <h3>METAL JIGS</h3>
+            <p>Built for serious anglers, our Metal Jigs offer incredible casting distance and natural fluttering motion underwater. Made from high-density metal with premium finishes, they deliver irresistible flash and vibration to draw strikes from deep or fast-moving fish. Perfect for both offshore and shore casting.</p>
+        </div>
+
+        <div class="lure-item">
+            <i class="fa-solid fa-crosshairs"></i>
+            <h3>JIG HEADS</h3>
+            <p>Engineered for strength and precision, our Jig Heads provide a secure base for soft plastic lures. The perfectly shaped head design promotes balanced swimming action and ensures strong, reliable hook penetration. Ideal for all freshwater and saltwater applications.</p>
+        </div>
+
+        <div class="lure-item">
+            <i class="fa-solid fa-fish-fins"></i>
+            <h3>RUBBER JIGS</h3>
+            <p>Crafted with premium skirts and durable hooks, Rubber Jigs replicate the movement of natural prey. Their pulsating skirt motion triggers reaction strikes from bass and other predators, making them a go-to for fishing in cover, structure, or bottom terrain.</p>
+        </div>
+
+        <div class="lure-item">
+            <i class="fa-solid fa-fan"></i>
+            <h3>SPINNER BAITS</h3>
+            <p>Our Spinner Baits feature polished blades that create flash and vibration, imitating fleeing baitfish. Designed for versatility and durability, they perform flawlessly at varying retrieve speeds and depths — perfect for attracting aggressive game fish.</p>
+        </div>
+
+        <div class="lure-item">
+            <i class="fa-solid fa-water"></i>
+            <h3>BUZZ BAITS</h3>
+            <p>For thrilling topwater action, our Buzz Baits churn the surface with a unique splashing noise that provokes powerful strikes. Built with premium wire frames, sharp hooks, and balanced bodies, they deliver reliable performance cast after cast.</p>
+        </div>
+        
+        <div class="lure-item">
+            <i class="fa-solid fa-hand-holding-water"></i>
+            <h3>SOFT PLASTIC LURES</h3>
+            <p>Realistic texture and flexibility make our Soft Plastic Lures a must-have in every angler’s tackle box. Designed for lifelike movement and natural presentation, they attract a variety of fish species in both freshwater and saltwater environments.</p>
+        </div>
+        
+        <div class="lure-item">
+            <i class="fa-solid fa-hand-holding-water"></i>
+            <h3><strong>METAL VIBRATION / CIRCUIT VIBRATION LURE</strong></h3>
+            <p>Compact and powerful, these lures deliver tight, high-frequency vibrations that mimic real baitfish movement. The thin metal or circuit board body ensures fast sinking and responsive action, while the multi-hole line tie lets anglers adjust depth and vibration strength. Perfect for freshwater and saltwater predators, these lures are built for precision, durability, and nonstop strikes.</p>
+        </div>
+        
+        <div class="lure-item">
+            <i class="fa-solid fa-box"></i>
+            <h3>ABS PLASTIC LURES</h3>
+            <p>Made from durable ABS material, these hard baits include Minnows, Crankbaits, and Poppers. Each lure features realistic detailing, weight balance, and premium coatings for consistent swimming action and sound attraction — built to endure tough conditions and repeated strikes.</p>
+        </div>
+
+    </div> 
+    </section>
+        </section>
+    </main>
+    
+    <script>
+        // === ELEMENT SELECTION ===
+        const serviceCards = document.querySelectorAll('.service-card');
+        const lureItems = document.querySelectorAll('.lure-item'); 
+        
+        // === CORE OBSERVER FUNCTION (Para i-animate ang mga element) ===
+        function createObserver(elements, className) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Magbigay ng staggered delay para isa-isa silang lumabas
+                        setTimeout(() => {
+                            entry.target.classList.add(className);
+                        }, index * 100); // 100ms delay sa bawat item
+                    } 
+                    // Hindi na kailangan ng else, para isang beses lang i-trigger ang animation
+                });
+            }, {
+                threshold: 0.2 // I-trigger kapag 20% ng item ay visible
+            });
+            
+            // Simulan ang pagtingin sa bawat element
+            elements.forEach(element => {
+                // I-check kung hindi mobile (kung naka-disable ang animation sa CSS media query)
+                // Sa mobile, naka-disable ang animation sa CSS kaya okay lang ito.
+                if (window.innerWidth >= 768) { 
+                    observer.observe(element);
+                } else {
+                    // Sa mobile, ipakita na lang agad (iniwasan ang animation sa CSS)
+                    element.classList.add(className);
+                }
+            });
+        }
+
+        // Simulan ang animation kapag loaded na ang page
+        window.addEventListener('load', () => {
+             // 1. Simulan ang animation para sa Service Cards (slide-in)
+            createObserver(serviceCards, 'show');
+
+            // 2. Simulan ang animation para sa Lure Items (fade-up)
+            createObserver(lureItems, 'animate-show');
+        });
+
+    </script>
+
+</body>
+</html>
